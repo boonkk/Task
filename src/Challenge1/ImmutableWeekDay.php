@@ -20,6 +20,7 @@ assertException(\OutOfRangeException::class);
 new ImmutableWeekDay(123);
 
 */
+
 class ImmutableWeekDay
 {
     public const SUNDAY    = 0;
@@ -30,26 +31,32 @@ class ImmutableWeekDay
     public const FRIDAY    = 5;
     public const SATURDAY  = 6;
 
+    private int $value;
+    
     /**
      * @throws \OutOfRangeException
      */
     public function __construct(int $value)
     {
-        //
+        if ($value < self::SUNDAY || $value > self::SATURDAY)
+        {
+            throw new \OutOfRangeException();
+        }
+        $this->value = $value;
     }
 
     public function addDays(int $value): ImmutableWeekDay
     {
-        //
+        return new ImmutableWeekDay(($this->value + $value) % 7);
     }
 
     public function equals(ImmutableWeekDay $day): bool
     {
-        //
+        return $this == $day;
     }
 
     public function isOfValue(int $value): bool
     {
-        //
+        return $this->value === $value;
     }
 }
