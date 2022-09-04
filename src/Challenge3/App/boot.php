@@ -1,5 +1,7 @@
 <?php
 
+use Interview\Challenge3\App\StateRequest;
+use Interview\Challenge3\Vendor\StateRequestFactoryInterface;
 use Interview\Misc\IoC;
 
 /*
@@ -13,6 +15,7 @@ use Interview\Misc\IoC;
  * That interface, is implemented in phpunit test, so you don't need to implement it on your own and just use it to get
  * a list of available states. Otherwise, you have to throw \DomainException.
  */
+IoC::set(StateRequestFactoryInterface::class, StateRequest::class);
 
 //IoC::set(
 // interface,
